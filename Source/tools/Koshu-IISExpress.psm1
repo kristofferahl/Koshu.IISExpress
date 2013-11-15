@@ -18,14 +18,14 @@ function Start-IISExpress {
 	param(
 		[Parameter(Position=0,Mandatory=1,ValueFromPipeline=$True)][string]$path,
 		[Parameter(Position=1,Mandatory=1,ValueFromPipeline=$True)][int]$port=8080,
-		[Parameter(Position=2,Mandatory=0,ValueFromPipeline=$True)][string]$name
+		[Parameter(Position=2,Mandatory=0,ValueFromPipeline=$True)][string]$name=$null
 	)
 
 	if (-not (test-path $path)) {
 		throw "The given application path does not exist ($path)"
 	}
 
-	if ($name -eq $null) {
+	if ($name -eq $null -or $name -eq '') {
 		$name = ($path | split-path -leaf)
 	}
 
